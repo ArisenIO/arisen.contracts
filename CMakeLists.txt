@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(eosio_contracts)
+project(arisen_contracts)
 
 set(VERSION_MAJOR 1)
 set(VERSION_MINOR 7)
@@ -15,27 +15,27 @@ endif()
 
 include(ExternalProject)
 
-find_package(eosio.cdt)
+find_package(arisen.cdt)
 
-message(STATUS "Building eosio.contracts v${VERSION_FULL}")
+message(STATUS "Building arisen.contracts v${VERSION_FULL}")
 
-set(EOSIO_CDT_VERSION_MIN "1.6")
-set(EOSIO_CDT_VERSION_SOFT_MAX "1.6")
-#set(EOSIO_CDT_VERSION_HARD_MAX "")
+set(ARISEN_CDT_VERSION_MIN "1.6")
+set(ARISEN_CDT_VERSION_SOFT_MAX "1.6")
+#set(ARISEN_CDT_VERSION_HARD_MAX "")
 
-### Check the version of eosio.cdt
+### Check the version of arisen.cdt
 set(VERSION_MATCH_ERROR_MSG "")
-EOSIO_CHECK_VERSION(VERSION_OUTPUT "${EOSIO_CDT_VERSION}"
-                                   "${EOSIO_CDT_VERSION_MIN}"
-                                   "${EOSIO_CDT_VERSION_SOFT_MAX}"
-                                   "${EOSIO_CDT_VERSION_HARD_MAX}"
+ARISEN_CHECK_VERSION(VERSION_OUTPUT "${ARISEN_CDT_VERSION}"
+                                   "${ARISEN_CDT_VERSION_MIN}"
+                                   "${ARISEN_CDT_VERSION_SOFT_MAX}"
+                                   "${ARISEN_CDT_VERSION_HARD_MAX}"
                                    VERSION_MATCH_ERROR_MSG)
 if(VERSION_OUTPUT STREQUAL "MATCH")
-   message(STATUS "Using eosio.cdt version ${EOSIO_CDT_VERSION}")
+   message(STATUS "Using arisen.cdt version ${ARISEN_CDT_VERSION}")
 elseif(VERSION_OUTPUT STREQUAL "WARN")
-   message(WARNING "Using eosio.cdt version ${EOSIO_CDT_VERSION} even though it exceeds the maximum supported version of ${EOSIO_CDT_VERSION_SOFT_MAX}; continuing with configuration, however build may fail.\nIt is recommended to use eosio.cdt version ${EOSIO_CDT_VERSION_SOFT_MAX}.x")
+   message(WARNING "Using arisen.cdt version ${ARISEN_CDT_VERSION} even though it exceeds the maximum supported version of ${ARISEN_CDT_VERSION_SOFT_MAX}; continuing with configuration, however build may fail.\nIt is recommended to use arisen.cdt version ${ARISEN_CDT_VERSION_SOFT_MAX}.x")
 else() # INVALID OR MISMATCH
-   message(FATAL_ERROR "Found eosio.cdt version ${EOSIO_CDT_VERSION} but it does not satisfy version requirements: ${VERSION_MATCH_ERROR_MSG}\nPlease use eosio.cdt version ${EOSIO_CDT_VERSION_SOFT_MAX}.x")
+   message(FATAL_ERROR "Found arisen.cdt version ${ARISEN_CDT_VERSION} but it does not satisfy version requirements: ${VERSION_MATCH_ERROR_MSG}\nPlease use arisen.cdt version ${ARISEN_CDT_VERSION_SOFT_MAX}.x")
 endif(VERSION_OUTPUT STREQUAL "MATCH")
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -49,7 +49,7 @@ ExternalProject_Add(
    contracts_project
    SOURCE_DIR ${CMAKE_SOURCE_DIR}/contracts
    BINARY_DIR ${CMAKE_BINARY_DIR}/contracts
-   CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=${EOSIO_CDT_ROOT}/lib/cmake/eosio.cdt/EosioWasmToolchain.cmake
+   CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=${ARISEN_CDT_ROOT}/lib/cmake/arisen.cdt/ArisenWasmToolchain.cmake
    UPDATE_COMMAND ""
    PATCH_COMMAND ""
    TEST_COMMAND ""
@@ -77,7 +77,7 @@ string(REPLACE ";" "|" TEST_MODULE_PATH "${CMAKE_MODULE_PATH}")
 ExternalProject_Add(
   contracts_unit_tests
   LIST_SEPARATOR | # Use the alternate list separator
-  CMAKE_ARGS -DCMAKE_BUILD_TYPE=${TEST_BUILD_TYPE} -DCMAKE_FRAMEWORK_PATH=${TEST_FRAMEWORK_PATH} -DCMAKE_MODULE_PATH=${TEST_MODULE_PATH} -DEOSIO_ROOT=${EOSIO_ROOT} -DLLVM_DIR=${LLVM_DIR}
+  CMAKE_ARGS -DCMAKE_BUILD_TYPE=${TEST_BUILD_TYPE} -DCMAKE_FRAMEWORK_PATH=${TEST_FRAMEWORK_PATH} -DCMAKE_MODULE_PATH=${TEST_MODULE_PATH} -DARISEN_ROOT=${ARISEN_ROOT} -DLLVM_DIR=${LLVM_DIR}
   SOURCE_DIR ${CMAKE_SOURCE_DIR}/tests
   BINARY_DIR ${CMAKE_BINARY_DIR}/tests
   BUILD_ALWAYS 1

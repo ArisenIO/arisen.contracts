@@ -3,8 +3,8 @@ set -eo pipefail
 
 function usage() {
    printf "Usage: $0 OPTION...
-  -e DIR      Directory where EOSIO is installed. (Default: $HOME/eosio/X.Y)
-  -c DIR      Directory where EOSIO.CDT is installed. (Default: /usr/local/eosio.cdt)
+  -e DIR      Directory where ARISEN is installed. (Default: $HOME/arisen/X.Y)
+  -c DIR      Directory where ARISEN.CDT is installed. (Default: /usr/local/arisen.cdt)
   -y          Noninteractive mode (Uses defaults for each prompt.)
   -h          Print this help menu.
    \\n" "$0" 1>&2
@@ -15,7 +15,7 @@ if [ $# -ne 0 ]; then
   while getopts "e:c:yh" opt; do
     case "${opt}" in
       e )
-        EOSIO_DIR_PROMPT=$OPTARG
+        ARISEN_DIR_PROMPT=$OPTARG
       ;;
       c )
         CDT_DIR_PROMPT=$OPTARG
@@ -46,16 +46,16 @@ fi
 . ./scripts/.environment
 . ./scripts/helper.sh
 
-# Prompt user for location of eosio.
-eosio-directory-prompt
+# Prompt user for location of arisen.
+arisen-directory-prompt
 
-# Prompt user for location of eosio.cdt.
+# Prompt user for location of arisen.cdt.
 cdt-directory-prompt
 
-# Ensure eosio version is appropriate.
-nodeos-version-check
+# Ensure arisen version is appropriate.
+aos-version-check
 
-printf "\t=========== Building eosio.contracts ===========\n\n"
+printf "\t=========== Building arisen.contracts ===========\n\n"
 RED='\033[0;31m'
 NC='\033[0m'
 CPU_CORES=$(getconf _NPROCESSORS_ONLN)
