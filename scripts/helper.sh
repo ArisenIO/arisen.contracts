@@ -24,7 +24,7 @@ function check-version-numbers() {
 
 
 # Handles choosing which ARISEN directory to select when the default location is used.
-function default-eosio-directories() {
+function default-arisen-directories() {
   REGEX='^[0-9]+([.][0-9]+)?$'
   ALL_ARISEN_SUBDIRS=()
   if [[ -d ${HOME}/eosio ]]; then
@@ -48,7 +48,7 @@ function default-eosio-directories() {
 
 
 # Prompts or sets default behavior for choosing ARISEN directory.
-function eosio-directory-prompt() {
+function arisen-directory-prompt() {
   if [[ -z $ARISEN_DIR_PROMPT ]]; then
     default-eosio-directories;
     echo 'No ARISEN location was specified.'
@@ -112,7 +112,7 @@ function cdt-directory-prompt() {
 
 
 # Ensures ARISEN is installed and compatible via version listed in tests/CMakeLists.txt.
-function nodeos-version-check() {
+function aos-version-check() {
   INSTALLED_VERSION=$(echo $($ARISEN_INSTALL_DIR/bin/nodeos --version))
   INSTALLED_VERSION_MAJOR=$(echo $INSTALLED_VERSION | cut -f1 -d '.' | sed 's/v//g')
   INSTALLED_VERSION_MINOR=$(echo $INSTALLED_VERSION | cut -f2 -d '.' | sed 's/v//g')
