@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 project(arisen_contracts)
 
 set(VERSION_MAJOR 1)
-set(VERSION_MINOR 7)
+set(VERSION_MINOR 0)
 set(VERSION_PATCH 0)
 #set(VERSION_SUFFIX develop)
 
