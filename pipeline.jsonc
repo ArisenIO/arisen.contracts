@@ -4,8 +4,8 @@
         "pipeline-branch": "master",
         "dependencies": // dependencies to pull for a build of contracts, by branch, tag, or commit hash
         {
-            "arisen": "release/1.8.x",
-            "arisen.cdt": "release/1.6.x"
+            "arisen": "85ddb1776d47c20dd5969ec2a1c86d9f3b160bd0",
+            "arisen.cdt": "release/1.0.x"
         }
     }
 }

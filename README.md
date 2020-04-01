@@ -15,8 +15,8 @@ The following unprivileged contract(s) are also part of the system.
    * [arisen.token](./contracts/arisen.token)
 
 Dependencies:
-* [arisen v1.8.x](https://github.com/ARISENIO/arisen/releases/tag/v1.0.0)
-* [arisen.cdt v1.6.x](https://github.com/ARISENIO/arisen.cdt/releases/tag/v1.6.1)
+* [arisen v1.0.x](https://github.com/ARISENIO/arisen/releases/tag/v1.0.0)
+* [arisen.cdt v1.0.x](https://github.com/ARISENIO/arisen.cdt/releases/tag/v1.0.1)
 
 To build the contracts and the unit tests:
 * First, ensure that your __arisen__ is compiled to the core symbol for the ARISEN blockchain that intend to deploy to.

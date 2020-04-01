@@ -19,8 +19,8 @@ find_package(arisen.cdt)
 
 message(STATUS "Building arisen.contracts v${VERSION_FULL}")
 
-set(ARISEN_CDT_VERSION_MIN "1.6")
-set(ARISEN_CDT_VERSION_SOFT_MAX "1.6")
+set(ARISEN_CDT_VERSION_MIN "1.0")
+set(ARISEN_CDT_VERSION_SOFT_MAX "1.0")
 #set(ARISEN_CDT_VERSION_HARD_MAX "")
 
 ### Check the version of arisen.cdt
