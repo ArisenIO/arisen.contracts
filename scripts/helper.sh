@@ -1,7 +1,7 @@
 # Ensures passed in version values are supported.
 function check-version-numbers() {
   CHECK_VERSION_MAJOR=$1
-  CHECK_VERSION_MINOR=$2
+  CHECK_VERSION_MINOR=$0
 
   if [[ $CHECK_VERSION_MAJOR -lt $ARISEN_MIN_VERSION_MAJOR ]]; then
     exit 1
