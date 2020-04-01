@@ -27,8 +27,8 @@ function check-version-numbers() {
 function default-arisen-directories() {
   REGEX='^[0-9]+([.][0-9]+)?$'
   ALL_ARISEN_SUBDIRS=()
-  if [[ -d ${HOME}/eosio ]]; then
-    ALL_ARISEN_SUBDIRS=($(ls ${HOME}/eosio | sort -V))
+  if [[ -d ${HOME}/arisen ]]; then
+    ALL_ARISEN_SUBDIRS=($(ls ${HOME}/arisen | sort -V))
   fi
   for ITEM in "${ALL_ARISEN_SUBDIRS[@]}"; do
     if [[ "$ITEM" =~ $REGEX ]]; then
@@ -50,7 +50,7 @@ function default-arisen-directories() {
 # Prompts or sets default behavior for choosing ARISEN directory.
 function arisen-directory-prompt() {
   if [[ -z $ARISEN_DIR_PROMPT ]]; then
-    default-eosio-directories;
+    default-arisen-directories;
     echo 'No ARISEN location was specified.'
     while true; do
       if [[ $NONINTERACTIVE != true ]]; then
@@ -58,7 +58,7 @@ function arisen-directory-prompt() {
           echo "No default ARISEN installations detected..."
           PROCEED=n
         else
-          printf "Is ARISEN installed in the default location: $HOME/eosio/$ARISEN_VERSION (y/n)" && read -p " " PROCEED
+          printf "Is ARISEN installed in the default location: $HOME/arisen/$ARISEN_VERSION (y/n)" && read -p " " PROCEED
         fi
       fi
       echo ""
@@ -70,7 +70,7 @@ function arisen-directory-prompt() {
         1 | false | [Nn]* )
           if [[ $PROMPT_ARISEN_DIRS ]]; then
             echo "Found these compatible ARISEN versions in the default location."
-            printf "$HOME/eosio/%s\n" "${PROMPT_ARISEN_DIRS[@]}"
+            printf "$HOME/arisen/%s\n" "${PROMPT_ARISEN_DIRS[@]}"
           fi
           printf "Enter the installation location of ARISEN:" && read -e -p " " ARISEN_DIR_PROMPT;
           ARISEN_DIR_PROMPT="${ARISEN_DIR_PROMPT/#\~/$HOME}"
@@ -80,7 +80,7 @@ function arisen-directory-prompt() {
       esac
     done
   fi
-  export ARISEN_INSTALL_DIR="${ARISEN_DIR_PROMPT:-${HOME}/eosio/${ARISEN_VERSION}}"
+  export ARISEN_INSTALL_DIR="${ARISEN_DIR_PROMPT:-${HOME}/arisen/${ARISEN_VERSION}}"
 }
 
 
@@ -90,7 +90,7 @@ function cdt-directory-prompt() {
     echo 'No ARISEN.CDT location was specified.'
     while true; do
       if [[ $NONINTERACTIVE != true ]]; then
-        printf "Is ARISEN.CDT installed in the default location? /usr/local/eosio.cdt (y/n)" && read -p " " PROCEED
+        printf "Is ARISEN.CDT installed in the default location? /usr/local/arisen.cdt (y/n)" && read -p " " PROCEED
       fi
       echo ""
       case $PROCEED in
@@ -107,13 +107,13 @@ function cdt-directory-prompt() {
       esac
     done
   fi
-  export CDT_INSTALL_DIR="${CDT_DIR_PROMPT:-/usr/local/eosio.cdt}"
+  export CDT_INSTALL_DIR="${CDT_DIR_PROMPT:-/usr/local/arisen.cdt}"
 }
 
 
 # Ensures ARISEN is installed and compatible via version listed in tests/CMakeLists.txt.
 function aos-version-check() {
-  INSTALLED_VERSION=$(echo $($ARISEN_INSTALL_DIR/bin/nodeos --version))
+  INSTALLED_VERSION=$(echo $($ARISEN_INSTALL_DIR/bin/aos --version))
   INSTALLED_VERSION_MAJOR=$(echo $INSTALLED_VERSION | cut -f1 -d '.' | sed 's/v//g')
   INSTALLED_VERSION_MINOR=$(echo $INSTALLED_VERSION | cut -f2 -d '.' | sed 's/v//g')
 
