@@ -117,21 +117,21 @@ function aos-version-check() {
   INSTALLED_VERSION_MAJOR=$(echo $INSTALLED_VERSION | cut -f1 -d '.' | sed 's/v//g')
   INSTALLED_VERSION_MINOR=$(echo $INSTALLED_VERSION | cut -f2 -d '.' | sed 's/v//g')
 
-  if [[ -z $INSTALLED_VERSION_MAJOR || -z $INSTALLED_VERSION_MINOR ]]; then
-    echo "Could not determine ARISEN version. Exiting..."
-    exit 1;
-  fi
+  #if [[ -z $INSTALLED_VERSION_MAJOR || -z $INSTALLED_VERSION_MINOR ]]; then
+    #echo "Could not determine ARISEN version. Exiting..."
+    #exit 1;
+  #fi
 
-  if $(check-version-numbers $INSTALLED_VERSION_MAJOR $INSTALLED_VERSION_MINOR); then
-    if [[ $INSTALLED_VERSION_MAJOR -gt $ARISEN_SOFT_MAX_MAJOR ]]; then
-      echo "Detected ARISEN version is greater than recommended soft max: $ARISEN_SOFT_MAX_MAJOR.$ARISEN_SOFT_MAX_MINOR. Proceed with caution."
-    fi
-    if [[ $INSTALLED_VERSION_MAJOR -eq $ARISEN_SOFT_MAX_MAJOR && $INSTALLED_VERSION_MINOR -gt $ARISEN_SOFT_MAX_MINOR ]]; then
-      echo "Detected ARISEN version is greater than recommended soft max: $ARISEN_SOFT_MAX_MAJOR.$ARISEN_SOFT_MAX_MINOR. Proceed with caution."
-    fi
-  else
-    echo "Supported versions are: $ARISEN_MIN_VERSION_MAJOR.$ARISEN_MIN_VERSION_MINOR - $ARISEN_MAX_VERSION_MAJOR.$ARISEN_MAX_VERSION_MINOR"
-    echo "Invalid ARISEN installation. Exiting..."
-    exit 1;
-  fi
+  #if $(check-version-numbers $INSTALLED_VERSION_MAJOR $INSTALLED_VERSION_MINOR); then
+    #if [[ $INSTALLED_VERSION_MAJOR -gt $ARISEN_SOFT_MAX_MAJOR ]]; then
+      #echo "Detected ARISEN version is greater than recommended soft max: $ARISEN_SOFT_MAX_MAJOR.$ARISEN_SOFT_MAX_MINOR. Proceed with caution."
+    #fi
+    #if [[ $INSTALLED_VERSION_MAJOR -eq $ARISEN_SOFT_MAX_MAJOR && $INSTALLED_VERSION_MINOR -gt $ARISEN_SOFT_MAX_MINOR ]]; then
+      #echo "Detected ARISEN version is greater than recommended soft max: $ARISEN_SOFT_MAX_MAJOR.$ARISEN_SOFT_MAX_MINOR. Proceed with caution."
+    #fi
+  #else
+    #echo "Supported versions are: $ARISEN_MIN_VERSION_MAJOR.$ARISEN_MIN_VERSION_MINOR - $ARISEN_MAX_VERSION_MAJOR.$ARISEN_MAX_VERSION_MINOR"
+    #echo "Invalid ARISEN installation. Exiting..."
+    #exit 1;
+  #fi
 }
