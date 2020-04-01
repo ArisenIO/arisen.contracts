@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e # exit on failure of any "simple" command (excludes &&, ||, or | chains)
 # expected places to find ARISEN CMAKE in the docker container, in ascending order of preference
-[[ -e /usr/lib/arisen/lib/cmake/arisen/arisen-config.cmake ]] && export CMAKE_FRAMEWORK_PATH="/usr/lib/arisen"
-[[ -e /opt/arisen/lib/cmake/arisen/arisen-config.cmake ]] && export CMAKE_FRAMEWORK_PATH="/opt/arisen"
+[[ -e /root/arisen/1.0/lib/cmake/arisen/arisen-config.cmake ]] && export CMAKE_FRAMEWORK_PATH="/root/arisen/1.0"
+[[ -e /root/arisen/1.0/lib/cmake/arisen/arisen-config.cmake ]] && export CMAKE_FRAMEWORK_PATH="/root/arisen/1.0"
 [[ ! -z "$ARISEN_ROOT" && -e $ARISEN_ROOT/lib/cmake/arisen/arisen-config.cmake ]] && export CMAKE_FRAMEWORK_PATH="$ARISEN_ROOT"
 # fail if we didn't find it
 [[ -z "$CMAKE_FRAMEWORK_PATH" ]] && exit 1
