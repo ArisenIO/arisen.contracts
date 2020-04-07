@@ -40,11 +40,11 @@ BOOST_FIXTURE_TEST_CASE( buysell, arisen_system_tester ) try {
    auto init_bytes =  total["ram_bytes"].as_uint64();
 
    const asset initial_ram_balance = get_balance(N(arisen.ram));
-   const asset initial_ramfee_balance = get_balance(N(arisen.ramfee));
+   const asset initial_ramfee_balance = get_balance(N(arisen.rfee));
    BOOST_REQUIRE_EQUAL( success(), buyram( "alice1111111", "alice1111111", core_sym::from_string("200.0000") ) );
    BOOST_REQUIRE_EQUAL( core_sym::from_string("800.0000"), get_balance( "alice1111111" ) );
    BOOST_REQUIRE_EQUAL( initial_ram_balance + core_sym::from_string("199.0000"), get_balance(N(arisen.ram)) );
-   BOOST_REQUIRE_EQUAL( initial_ramfee_balance + core_sym::from_string("1.0000"), get_balance(N(arisen.ramfee)) );
+   BOOST_REQUIRE_EQUAL( initial_ramfee_balance + core_sym::from_string("1.0000"), get_balance(N(arisen.rfee)) );
 
    total = get_total_stake( "alice1111111" );
    auto bytes = total["ram_bytes"].as_uint64();
@@ -1271,7 +1271,7 @@ BOOST_FIXTURE_TEST_CASE(producer_pay, arisen_system_tester, * boost::unit_test::
       const uint64_t initial_claim_time        = microseconds_since_epoch_of_iso_string( initial_global_state["last_pervote_bucket_fill"] );
       const int64_t  initial_pervote_bucket    = initial_global_state["pervote_bucket"].as<int64_t>();
       const int64_t  initial_perblock_bucket   = initial_global_state["perblock_bucket"].as<int64_t>();
-      const int64_t  initial_savings           = get_balance(N(arisen.saving)).get_amount();
+      const int64_t  initial_savings           = get_balance(N(arisen.save)).get_amount();
       const uint32_t initial_tot_unpaid_blocks = initial_global_state["total_unpaid_blocks"].as<uint32_t>();
 
       prod = get_producer_info("defproducera");
@@ -1289,7 +1289,7 @@ BOOST_FIXTURE_TEST_CASE(producer_pay, arisen_system_tester, * boost::unit_test::
       const uint64_t claim_time        = microseconds_since_epoch_of_iso_string( global_state["last_pervote_bucket_fill"] );
       const int64_t  pervote_bucket    = global_state["pervote_bucket"].as<int64_t>();
       const int64_t  perblock_bucket   = global_state["perblock_bucket"].as<int64_t>();
-      const int64_t  savings           = get_balance(N(arisen.saving)).get_amount();
+      const int64_t  savings           = get_balance(N(arisen.save)).get_amount();
       const uint32_t tot_unpaid_blocks = global_state["total_unpaid_blocks"].as<uint32_t>();
 
       prod = get_producer_info("defproducera");
@@ -1347,7 +1347,7 @@ BOOST_FIXTURE_TEST_CASE(producer_pay, arisen_system_tester, * boost::unit_test::
       const uint64_t initial_claim_time        = microseconds_since_epoch_of_iso_string( initial_global_state["last_pervote_bucket_fill"] );
       const int64_t  initial_pervote_bucket    = initial_global_state["pervote_bucket"].as<int64_t>();
       const int64_t  initial_perblock_bucket   = initial_global_state["perblock_bucket"].as<int64_t>();
-      const int64_t  initial_savings           = get_balance(N(arisen.saving)).get_amount();
+      const int64_t  initial_savings           = get_balance(N(arisen.save)).get_amount();
       const uint32_t initial_tot_unpaid_blocks = initial_global_state["total_unpaid_blocks"].as<uint32_t>();
       const double   initial_tot_vote_weight   = initial_global_state["total_producer_vote_weight"].as<double>();
 
@@ -1370,7 +1370,7 @@ BOOST_FIXTURE_TEST_CASE(producer_pay, arisen_system_tester, * boost::unit_test::
       const uint64_t claim_time        = microseconds_since_epoch_of_iso_string( global_state["last_pervote_bucket_fill"] );
       const int64_t  pervote_bucket    = global_state["pervote_bucket"].as<int64_t>();
       const int64_t  perblock_bucket   = global_state["perblock_bucket"].as<int64_t>();
-      const int64_t  savings           = get_balance(N(arisen.saving)).get_amount();
+      const int64_t  savings           = get_balance(N(arisen.save)).get_amount();
       const uint32_t tot_unpaid_blocks = global_state["total_unpaid_blocks"].as<uint32_t>();
 
       prod = get_producer_info("defproducera");
@@ -1412,7 +1412,7 @@ BOOST_FIXTURE_TEST_CASE(producer_pay, arisen_system_tester, * boost::unit_test::
       regproducer(N(defproducerc));
       produce_block(fc::hours(24));
       const asset   initial_supply  = get_token_supply();
-      const int64_t initial_savings = get_balance(N(arisen.saving)).get_amount();
+      const int64_t initial_savings = get_balance(N(arisen.save)).get_amount();
       for (uint32_t i = 0; i < 7 * 52; ++i) {
          produce_block(fc::seconds(8 * 3600));
          BOOST_REQUIRE_EQUAL(success(), push_action(N(defproducerc), N(claimrewards), mvo()("owner", "defproducerc")));
@@ -1422,7 +1422,7 @@ BOOST_FIXTURE_TEST_CASE(producer_pay, arisen_system_tester, * boost::unit_test::
          BOOST_REQUIRE_EQUAL(success(), push_action(N(defproducera), N(claimrewards), mvo()("owner", "defproducera")));
       }
       const asset   supply  = get_token_supply();
-      const int64_t savings = get_balance(N(arisen.saving)).get_amount();
+      const int64_t savings = get_balance(N(arisen.save)).get_amount();
       // Amount issued per year is very close to the 5% inflation target. Small difference (500 tokens out of 50'000'000 issued)
       // is due to compounding every 8 hours in this test as opposed to theoretical continuous compounding
       BOOST_REQUIRE(500 * 10000 > int64_t(double(initial_supply.get_amount()) * double(0.05)) - (supply.get_amount() - initial_supply.get_amount()));
@@ -1545,7 +1545,7 @@ BOOST_FIXTURE_TEST_CASE(multiple_producer_pay, arisen_system_tester, * boost::un
       const uint64_t initial_claim_time        = microseconds_since_epoch_of_iso_string( initial_global_state["last_pervote_bucket_fill"] );
       const int64_t  initial_pervote_bucket    = initial_global_state["pervote_bucket"].as<int64_t>();
       const int64_t  initial_perblock_bucket   = initial_global_state["perblock_bucket"].as<int64_t>();
-      const int64_t  initial_savings           = get_balance(N(arisen.saving)).get_amount();
+      const int64_t  initial_savings           = get_balance(N(arisen.save)).get_amount();
       const uint32_t initial_tot_unpaid_blocks = initial_global_state["total_unpaid_blocks"].as<uint32_t>();
       const asset    initial_supply            = get_token_supply();
       const asset    initial_bpay_balance      = get_balance(N(arisen.bpay));
@@ -1559,7 +1559,7 @@ BOOST_FIXTURE_TEST_CASE(multiple_producer_pay, arisen_system_tester, * boost::un
       const uint64_t claim_time        = microseconds_since_epoch_of_iso_string( global_state["last_pervote_bucket_fill"] );
       const int64_t  pervote_bucket    = global_state["pervote_bucket"].as<int64_t>();
       const int64_t  perblock_bucket   = global_state["perblock_bucket"].as<int64_t>();
-      const int64_t  savings           = get_balance(N(arisen.saving)).get_amount();
+      const int64_t  savings           = get_balance(N(arisen.save)).get_amount();
       const uint32_t tot_unpaid_blocks = global_state["total_unpaid_blocks"].as<uint32_t>();
       const asset    supply            = get_token_supply();
       const asset    bpay_balance      = get_balance(N(arisen.bpay));
@@ -1621,7 +1621,7 @@ BOOST_FIXTURE_TEST_CASE(multiple_producer_pay, arisen_system_tester, * boost::un
       const uint64_t initial_claim_time        = microseconds_since_epoch_of_iso_string( initial_global_state["last_pervote_bucket_fill"] );
       const int64_t  initial_pervote_bucket    = initial_global_state["pervote_bucket"].as<int64_t>();
       const int64_t  initial_perblock_bucket   = initial_global_state["perblock_bucket"].as<int64_t>();
-      const int64_t  initial_savings           = get_balance(N(arisen.saving)).get_amount();
+      const int64_t  initial_savings           = get_balance(N(arisen.save)).get_amount();
       const uint32_t initial_tot_unpaid_blocks = initial_global_state["total_unpaid_blocks"].as<uint32_t>();
       const asset    initial_supply            = get_token_supply();
       const asset    initial_bpay_balance      = get_balance(N(arisen.bpay));
@@ -1635,7 +1635,7 @@ BOOST_FIXTURE_TEST_CASE(multiple_producer_pay, arisen_system_tester, * boost::un
       const uint64_t claim_time        = microseconds_since_epoch_of_iso_string( global_state["last_pervote_bucket_fill"] );
       const int64_t  pervote_bucket    = global_state["pervote_bucket"].as<int64_t>();
       const int64_t  perblock_bucket   = global_state["perblock_bucket"].as<int64_t>();
-      const int64_t  savings           = get_balance(N(arisen.saving)).get_amount();
+      const int64_t  savings           = get_balance(N(arisen.save)).get_amount();
       const uint32_t tot_unpaid_blocks = global_state["total_unpaid_blocks"].as<uint32_t>();
       const asset    supply            = get_token_supply();
       const asset    bpay_balance      = get_balance(N(arisen.bpay));
@@ -3375,7 +3375,7 @@ BOOST_FIXTURE_TEST_CASE( arisenram_ramusage, arisen_system_tester ) try {
    BOOST_REQUIRE_EQUAL( success(), stake( "arisen", "alice1111111", core_sym::from_string("200.0000"), core_sym::from_string("100.0000") ) );
 
    const asset initial_ram_balance = get_balance(N(arisen.ram));
-   const asset initial_ramfee_balance = get_balance(N(arisen.ramfee));
+   const asset initial_ramfee_balance = get_balance(N(arisen.rfee));
    BOOST_REQUIRE_EQUAL( success(), buyram( "alice1111111", "alice1111111", core_sym::from_string("1000.0000") ) );
 
    BOOST_REQUIRE_EQUAL( false, get_row_by_account( N(arisen.token), N(alice1111111), N(accounts), symbol{CORE_SYM}.to_symbol_code() ).empty() );
@@ -4154,18 +4154,18 @@ BOOST_FIXTURE_TEST_CASE( ramfee_namebid_to_com, arisen_system_tester ) try {
    account_name alice = accounts[0], bob = accounts[1], carol = accounts[2], emily = accounts[3], frank = accounts[4];
    setup_com_accounts( accounts, init_balance, core_sym::from_string("80.0000"), core_sym::from_string("80.0000"), false );
 
-   asset cur_ramfee_balance = get_balance( N(arisen.ramfee) );
+   asset cur_ramfee_balance = get_balance( N(arisen.rfee) );
    BOOST_REQUIRE_EQUAL( success(),                      buyram( alice, alice, core_sym::from_string("20.0000") ) );
-   BOOST_REQUIRE_EQUAL( get_balance( N(arisen.ramfee) ), core_sym::from_string("0.1000") + cur_ramfee_balance );
+   BOOST_REQUIRE_EQUAL( get_balance( N(arisen.rfee) ), core_sym::from_string("0.1000") + cur_ramfee_balance );
    BOOST_REQUIRE_EQUAL( wasm_assert_msg("must deposit to COM fund first"),
                         buycom( alice, core_sym::from_string("350.0000") ) );
    BOOST_REQUIRE_EQUAL( success(),                      deposit( alice, core_sym::from_string("350.0000") ) );
    BOOST_REQUIRE_EQUAL( success(),                      buycom( alice, core_sym::from_string("350.0000") ) );
-   cur_ramfee_balance = get_balance( N(arisen.ramfee) );
+   cur_ramfee_balance = get_balance( N(arisen.rfee) );
    asset cur_com_balance = get_balance( N(arisen.com) );
    BOOST_REQUIRE_EQUAL( core_sym::from_string("350.0000"), cur_com_balance );
    BOOST_REQUIRE_EQUAL( success(),                         buyram( bob, carol, core_sym::from_string("70.0000") ) );
-   BOOST_REQUIRE_EQUAL( cur_ramfee_balance,                get_balance( N(arisen.ramfee) ) );
+   BOOST_REQUIRE_EQUAL( cur_ramfee_balance,                get_balance( N(arisen.rfee) ) );
    BOOST_REQUIRE_EQUAL( get_balance( N(arisen.com) ),       cur_com_balance + core_sym::from_string("0.3500") );
 
    cur_com_balance = get_balance( N(arisen.com) );
@@ -5078,7 +5078,7 @@ BOOST_FIXTURE_TEST_CASE( change_limited_account_back_to_unlimited, arisen_system
 
    BOOST_REQUIRE_EQUAL( error( "transaction net usage is too high: 128 > 0" ),
                         push_action( N(arisen), N(setalimits), mvo()
-                           ("account", "arisen.saving")
+                           ("account", "arisen.save")
                            ("ram_bytes", -1)
                            ("net_weight", -1)
                            ("cpu_weight", -1)
@@ -5102,7 +5102,7 @@ BOOST_FIXTURE_TEST_CASE( change_limited_account_back_to_unlimited, arisen_system
 
    BOOST_REQUIRE_EQUAL( success(),
                         push_action( N(arisen), N(setalimits), mvo()
-                                          ("account", "arisen.saving")
+                                          ("account", "arisen.save")
                                           ("ram_bytes", ram_bytes_needed)
                                           ("net_weight", -1)
                                           ("cpu_weight", -1)

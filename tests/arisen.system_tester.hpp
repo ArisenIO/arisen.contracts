@@ -32,8 +32,8 @@ public:
    void basic_setup() {
       produce_blocks( 2 );
 
-      create_accounts({ N(arisen.token), N(arisen.ram), N(arisen.ramfee), N(arisen.stake),
-               N(arisen.bpay), N(arisen.vpay), N(arisen.saving), N(arisen.names), N(arisen.com) });
+      create_accounts({ N(arisen.token), N(arisen.ram), N(arisen.rfee), N(arisen.stake),
+               N(arisen.bpay), N(arisen.vpay), N(arisen.save), N(arisen.names), N(arisen.com) });
 
 
       produce_blocks( 100 );
@@ -81,7 +81,7 @@ public:
       create_account_with_resources( N(bob111111111), config::system_account_name, core_sym::from_string("0.4500"), false );
       create_account_with_resources( N(carol1111111), config::system_account_name, core_sym::from_string("1.0000"), false );
 
-      BOOST_REQUIRE_EQUAL( core_sym::from_string("1000000000.0000"), get_balance("arisen")  + get_balance("arisen.ramfee") + get_balance("arisen.stake") + get_balance("arisen.ram") );
+      BOOST_REQUIRE_EQUAL( core_sym::from_string("1000000000.0000"), get_balance("arisen")  + get_balance("arisen.rfee") + get_balance("arisen.stake") + get_balance("arisen.ram") );
    }
 
    enum class setup_level {

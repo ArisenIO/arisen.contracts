@@ -548,12 +548,12 @@ namespace arisensystem {
          static constexpr arisen::name active_permission{"active"_n};
          static constexpr arisen::name token_account{"arisen.token"_n};
          static constexpr arisen::name ram_account{"arisen.ram"_n};
-         static constexpr arisen::name ramfee_account{"arisen.ramfee"_n};
+         static constexpr arisen::name ramfee_account{"arisen.rfee"_n};
          static constexpr arisen::name stake_account{"arisen.stake"_n};
          static constexpr arisen::name bpay_account{"arisen.bpay"_n};
          static constexpr arisen::name vpay_account{"arisen.vpay"_n};
          static constexpr arisen::name names_account{"arisen.names"_n};
-         static constexpr arisen::name saving_account{"arisen.saving"_n};
+         static constexpr arisen::name saving_account{"arisen.save"_n};
          static constexpr arisen::name com_account{"arisen.com"_n};
          static constexpr arisen::name null_account{"arisen.null"_n};
          static constexpr symbol ramcore_symbol = symbol(symbol_code("RAMCORE"), 4);
