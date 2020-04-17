@@ -857,7 +857,7 @@ BOOST_FIXTURE_TEST_CASE( vote_for_producer, arisen_system_tester, * boost::unit_
    BOOST_TEST_REQUIRE( stake2votes(core_sym::from_string("88.8888")) == prod["total_votes"].as_double() );
 
    //carol1111111 unstakes part of the stake
-   BOOST_REQUIRE_EQUAL( success(), unstake( "carol1111111", core_sym::from_string("2.0000"), core_sym::from_string("0.0002")/*"2.0000 RSN", "0.0002 RSN"*/ ) );
+   BOOST_REQUIRE_EQUAL( success(), unstake( "carol1111111", core_sym::from_string("2.0000"), core_sym::from_string("0.0002")/*"2.0000 RIX", "0.0002 RIX"*/ ) );
 
    //should decrease alice1111111's total_votes
    prod = get_producer_info( "alice1111111" );
@@ -2319,7 +2319,7 @@ BOOST_FIXTURE_TEST_CASE(votepay_transition, arisen_system_tester, * boost::unit_
 BOOST_AUTO_TEST_CASE(votepay_transition2, * boost::unit_test::tolerance(1e-10)) try {
    arisen_system_tester t(arisen_system_tester::setup_level::minimal);
 
-   std::string old_contract_core_symbol_name = "SYS"; // Set to core symbol used in contracts::util::system_wasm_old()
+   std::string old_contract_core_symbol_name = "RIX"; // Set to core symbol used in contracts::util::system_wasm_old()
    symbol old_contract_core_symbol{::arisen::chain::string_to_symbol_c( 4, old_contract_core_symbol_name.c_str() )};
 
    auto old_core_from_string = [&]( const std::string& s ) {
@@ -2832,7 +2832,7 @@ BOOST_FIXTURE_TEST_CASE( elect_producers /*_and_parameters*/, arisen_system_test
    BOOST_REQUIRE_EQUAL( success(), regproducer( "defproducer2", 2) );
    BOOST_REQUIRE_EQUAL( success(), regproducer( "defproducer3", 3) );
 
-   //stake more than 15% of total RSN supply to activate chain
+   //stake more than 15% of total RIX supply to activate chain
    transfer( "arisen", "alice1111111", core_sym::from_string("600000000.0000"), "arisen" );
    BOOST_REQUIRE_EQUAL( success(), stake( "alice1111111", "alice1111111", core_sym::from_string("300000000.0000"), core_sym::from_string("300000000.0000") ) );
    //vote for producers

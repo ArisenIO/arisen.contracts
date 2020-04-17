@@ -6,7 +6,7 @@ The arisen.wrap contract needs to be installed on a privileged account to functi
 
 First, the account `arisen.wrap` needs to be created. Since it has the restricted `arisen.` prefix, only a privileged account can create this account. So this guide will use the `arisen` account to create the `arisen.wrap` account. On typical live blockchain configurations, the `arisen` account can only be controlled by a supermajority of the current active block producers. So, this guide will use the `arisen.msig` contract to help coordinate the approvals of the proposed transaction that creates the `arisen.wrap` account.
 
-The `arisen.wrap` account also needs to have sufficient RAM to host the contract and sufficient CPU and network bandwidth to deploy the contract. This means that the creator of the account (`arisen`) needs to gift sufficient RAM to the new account and delegate (preferably with transfer) sufficient bandwidth to the new account. To pull this off the `arisen` account needs to have enough of the core system token (the `SYS` token will be used within this guide) in its liquid balance. So prior to continuing with the next steps of this guide, the active block producers of the chain who are coordinating this process need to ensure that a sufficient amount of core system tokens that they are authorized to spend is placed in the liquid balance of the `arisen` account.
+The `arisen.wrap` account also needs to have sufficient RAM to host the contract and sufficient CPU and network bandwidth to deploy the contract. This means that the creator of the account (`arisen`) needs to gift sufficient RAM to the new account and delegate (preferably with transfer) sufficient bandwidth to the new account. To pull this off the `arisen` account needs to have enough of the core system token (the `RIX` token will be used within this guide) in its liquid balance. So prior to continuing with the next steps of this guide, the active block producers of the chain who are coordinating this process need to ensure that a sufficient amount of core system tokens that they are authorized to spend is placed in the liquid balance of the `arisen` account.
 
 This guide will be using arisecli to carry out the process.
 
@@ -22,9 +22,9 @@ Three unsigned transactions will be generated using arisecli and then the action
 
 First, generate a transaction to capture the necessary actions involved in creating a new account:
 ```
-$ arisecli system newaccount -s -j -d --transfer --stake-net "1.000 SYS" --stake-cpu "1.000 SYS" --buy-ram-kbytes 50 arisen arisen.wrap RSN8MMUW11TAdTDxqdSwSqJodefSoZbFhcprndomgLi9MeR2o8MT4 > generated_account_creation_trx.json
+$ arisecli system newaccount -s -j -d --transfer --stake-net "1.000 RIX" --stake-cpu "1.000 RIX" --buy-ram-kbytes 50 arisen arisen.wrap RSN8MMUW11TAdTDxqdSwSqJodefSoZbFhcprndomgLi9MeR2o8MT4 > generated_account_creation_trx.json
 726964ms thread-0   main.cpp:429                  create_action        ] result: {"binargs":"0000000000ea305500004d1a03ea305500c80000"} arg: {"code":"arisen","action":"buyrambytes","args":{"payer":"arisen","receiver":"arisen.wrap","bytes":51200}}
-726967ms thread-0   main.cpp:429                  create_action        ] result: {"binargs":"0000000000ea305500004d1a03ea3055102700000000000004535953000000001027000000000000045359530000000001"} arg: {"code":"arisen","action":"delegatebw","args":{"from":"arisen","receiver":"arisen.wrap","stake_net_quantity":"1.0000 SYS","stake_cpu_quantity":"1.0000 SYS","transfer":true}}
+726967ms thread-0   main.cpp:429                  create_action        ] result: {"binargs":"0000000000ea305500004d1a03ea3055102700000000000004535953000000001027000000000000045359530000000001"} arg: {"code":"arisen","action":"delegatebw","args":{"from":"arisen","receiver":"arisen.wrap","stake_net_quantity":"1.0000 RIX","stake_cpu_quantity":"1.0000 RIX","transfer":true}}
 $ cat generated_account_creation_trx.json
 {
   "expiration": "2018-06-29T17:11:36",
@@ -372,15 +372,15 @@ memory:
      quota:     49.74 KiB    used:     3.33 KiB  
 
 net bandwidth:
-     staked:          1.0000 SYS           (total stake delegated from account to self)
-     delegated:       0.0000 SYS           (total staked delegated to account from others)
+     staked:          1.0000 RIX           (total stake delegated from account to self)
+     delegated:       0.0000 RIX           (total staked delegated to account from others)
      used:                 0 bytes
      available:        2.304 MiB  
      limit:            2.304 MiB  
 
 cpu bandwidth:
-     staked:          1.0000 SYS           (total stake delegated from account to self)
-     delegated:       0.0000 SYS           (total staked delegated to account from others)
+     staked:          1.0000 RIX           (total stake delegated from account to self)
+     delegated:       0.0000 RIX           (total staked delegated to account from others)
      used:                 0 us   
      available:        460.8 ms   
      limit:            460.8 ms   
@@ -614,15 +614,15 @@ memory:
      quota:     49.74 KiB    used:     3.365 KiB  
 
 net bandwidth:
-     staked:          1.0000 SYS           (total stake delegated from account to self)
-     delegated:       0.0000 SYS           (total staked delegated to account from others)
+     staked:          1.0000 RIX           (total stake delegated from account to self)
+     delegated:       0.0000 RIX           (total staked delegated to account from others)
      used:                 0 bytes
      available:        2.304 MiB  
      limit:            2.304 MiB  
 
 cpu bandwidth:
-     staked:          1.0000 SYS           (total stake delegated from account to self)
-     delegated:       0.0000 SYS           (total staked delegated to account from others)
+     staked:          1.0000 RIX           (total stake delegated from account to self)
+     delegated:       0.0000 RIX           (total staked delegated to account from others)
      used:                 0 us   
      available:        460.8 ms   
      limit:            460.8 ms   
@@ -856,15 +856,15 @@ memory:
      quota:     49.74 KiB    used:     3.348 KiB  
 
 net bandwidth:
-     staked:          1.0000 SYS           (total stake delegated from account to self)
-     delegated:       0.0000 SYS           (total staked delegated to account from others)
+     staked:          1.0000 RIX           (total stake delegated from account to self)
+     delegated:       0.0000 RIX           (total staked delegated to account from others)
      used:                 0 bytes
      available:        2.304 MiB  
      limit:            2.304 MiB  
 
 cpu bandwidth:
-     staked:          1.0000 SYS           (total stake delegated from account to self)
-     delegated:       0.0000 SYS           (total staked delegated to account from others)
+     staked:          1.0000 RIX           (total stake delegated from account to self)
+     delegated:       0.0000 RIX           (total staked delegated to account from others)
      used:               413 us   
      available:        460.4 ms   
      limit:            460.8 ms   

@@ -451,8 +451,8 @@ namespace arisensystem {
     * - `version` defaulted to zero,
     * - `from` account creating and paying for loan,
     * - `receiver` account receiving rented resources,
-    * - `payment` SYS tokens paid for the loan,
-    * - `balance` is the amount of SYS tokens available to be used for loan auto-renewal,
+    * - `payment` RIX tokens paid for the loan,
+    * - `balance` is the amount of RIX tokens available to be used for loan auto-renewal,
     * - `total_staked` total amount staked,
     * - `loan_num` loan number/id,
     * - `expiration` the expiration time when loan will be either closed or renewed
@@ -676,7 +676,7 @@ namespace arisensystem {
          /**
           * Delegate bandwidth and/or cpu action.
           *
-          * @details Stakes SYS from the balance of `from` for the benefit of `receiver`.
+          * @details Stakes RIX from the balance of `from` for the benefit of `receiver`.
           *
           * @param from - the account to delegate bandwidth from, that is, the account holding
           *    tokens to be staked,
@@ -801,7 +801,7 @@ namespace arisensystem {
          /**
           * Rentcpu action.
           *
-          * @details Use payment to rent as many SYS tokens as possible as determined by market price and
+          * @details Use payment to rent as many RIX tokens as possible as determined by market price and
           * stake them for CPU for the benefit of receiver, after 30 days the rented core delegation of CPU
           * will expire. At expiration, if balance is greater than or equal to `loan_payment`, `loan_payment`
           * is taken out of loan balance and used to renew the loan. Otherwise, the loan is closed and user
@@ -823,7 +823,7 @@ namespace arisensystem {
          /**
           * Rentnet action.
           *
-          * @details Use payment to rent as many SYS tokens as possible as determined by market price and
+          * @details Use payment to rent as many RIX tokens as possible as determined by market price and
           * stake them for NET for the benefit of receiver, after 30 days the rented core delegation of NET
           * will expire. At expiration, if balance is greater than or equal to `loan_payment`, `loan_payment`
           * is taken out of loan balance and used to renew the loan. Otherwise, the loan is closed and user
@@ -1118,7 +1118,7 @@ namespace arisensystem {
           * @pre If proxy is set then proxy account must exist and be registered as a proxy
           * @pre Every listed producer or proxy must have been previously registered
           * @pre Voter must authorize this action
-          * @pre Voter must have previously staked some RSN for voting
+          * @pre Voter must have previously staked some RIX for voting
           * @pre Voter->staked must be up to date
           *
           * @post Every producer previously voted for will have vote reduced by previous vote weight

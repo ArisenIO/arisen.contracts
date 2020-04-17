@@ -393,7 +393,7 @@ Sell {{bytes}} bytes of unused RAM from account {{account}} at market price. Thi
 
 ---
 spec_version: "0.2.0"
-title: Sell COM Tokens in Exchange for RSN
+title: Sell COM Tokens in Exchange for RIX
 summary: '{{nowrap from}} sells {{nowrap com}} tokens'
 icon: @ICON_BASE_URL@/@COM_ICON_URI@
 ---
